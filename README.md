@@ -33,14 +33,13 @@ Intel i7-2660 CPU @ 3.40Ghz
 Windows 7, 64-bit, Service Pack 1
 Oracle JDK 1.7.0_51 build 13, 64-bit Server VM
 
-| Algorithm | Time Taken (ms) |\
+| Algorithm | Time Taken (ms) |
 | :-------- | --------------: |
-| Murmur-1  | 143 |
-| Murmur-2  | 135 |
 | Murmur-2-64 | 102 |
-| Murmur-3  | 168 |
+| Murmur-2  | 135 |
+| Murmur-1  | 143 |
 | Murmur-3-128 | 160 |
-| | |
+| Murmur-3  | 168 |
 | MD5 | 369 |
 | SHA-1 | 482 |
 | SHA-256 | 677 |
