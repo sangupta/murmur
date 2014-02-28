@@ -28,10 +28,12 @@ between various Murmur hashes, and `MD5`, `SHA-1`, `SHA-256`, and `SHA-512` hash
 
 The results of a sample run on my dev machine are as under:
 
+```
 Intel i7-2660 CPU @ 3.40Ghz
 16-GB RAM
 Windows 7, 64-bit, Service Pack 1
 Oracle JDK 1.7.0_51 build 13, 64-bit Server VM
+```
 
 | Algorithm | Time Taken (ms) |
 | :-------- | --------------: |
