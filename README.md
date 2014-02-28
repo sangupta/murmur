@@ -7,6 +7,13 @@ unit tested against the hashes generated using the C++ code. The library should 
 out bloom filters, or to just compute the hash for checking sanity of data, as Murmur3 is much faster
 than MD5 and SHA computations.
 
+Why `murmur`
+------------
+
+`murmur` was developed as we could not find pure Java implementations for `Murmur1` and `Murmur2` hashes.
+Implementations were available for `Murmur3` but for some of the legacy code that I maintain, I needed
+the `Murmur1` and `Murmur2` hashes. Thus, I ported the original implementations.
+
 Features
 --------
 * Pure Java implementations of various Murmur hashes
