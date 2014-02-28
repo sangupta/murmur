@@ -37,9 +37,8 @@ import org.junit.Test;
  * Test the hash algorithm for all Murmur hashes (1/2/3) that check hashes
  * of all English words against hashes computed using actual Murmur C++ code.
  * 
- * All english words: http://www.sitopreferito.it/html/all_english_words.html
- * Numbers from 1 to 216553
- * 216553 random type-4 UUIDs
+ * All english words: <a href="http://www.sitopreferito.it/html/all_english_words.html">
+ * http://www.sitopreferito.it/html/all_english_words.html</a>
  * 
  */
 public class MurmurEnglishTest implements MurmurConstants {
@@ -54,6 +53,9 @@ public class MurmurEnglishTest implements MurmurConstants {
 	 */
 	private static final String BASE_PATH = new File(((URL) MurmurEnglishTest.class.getResource("/english/")).getFile()).getAbsolutePath();
 	
+	/**
+	 * Holds the generated hash string, to be compared with text files
+	 */
 	private final StringBuilder builder = new StringBuilder(100);
 	
 	@Test
@@ -110,17 +112,6 @@ public class MurmurEnglishTest implements MurmurConstants {
 			
 		});
 	}
-	
-//	@Test
-//	public void testEnglishWordsMurmur3_x86_128() throws IOException {
-//		testHashes("hash3-x86-128.txt", new StringHashFunction() {
-//			
-//			public String getHash(byte[] bytes) {
-//				return String.valueOf(Murmur3.hash_x86_128(bytes, bytes.length, MURMUR_SEED));
-//			}
-//			
-//		});
-//	}
 	
 	@Test
 	public void testEnglishWordsMurmur3_x64_128() throws IOException {
@@ -183,12 +174,6 @@ public class MurmurEnglishTest implements MurmurConstants {
 					
 					if(allMatch) {
 						matched++;
-					} else {
-//						System.out.println("Failed for word: " + line);
-//						System.out.println("actual: " + actual);
-//						System.out.println("computed: " + computed);
-//						
-//						throw new RuntimeException("mismatch found");
 					}
 				}
 			} else {
@@ -227,7 +212,6 @@ public class MurmurEnglishTest implements MurmurConstants {
 			System.out.println("computed: " + computed);
 
 			throw new RuntimeException("Failed");
-//			e.printStackTrace();
 		}
 		
 		return false;
