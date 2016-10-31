@@ -29,23 +29,32 @@ between various Murmur hashes, and `MD5`, `SHA-1`, `SHA-256`, and `SHA-512` hash
 The results of a sample run on my dev machine are as under:
 
 ```
+Windows
+-------
 Intel i7-2660 CPU @ 3.40Ghz
 16-GB RAM
 Windows 7, 64-bit, Service Pack 1
 Oracle JDK 1.7.0_51 build 13, 64-bit Server VM
+
+OS X
+----
+Intel i7-4870HQ CPU @ 2.50GHz
+16-GB RAM
+macOS Sierra 10.12.1
+Oracle JDK 1.8.0_101 build 13, 64-bit Server VM
 ```
 
-| Algorithm | Time Taken (ms) |
-| :-------- | --------------: |
-| Murmur-2-64 | 102 |
-| Murmur-2  | 135 |
-| Murmur-1  | 143 |
-| Murmur-3-128 | 160 |
-| Murmur-3  | 168 |
-| MD5 | 369 |
-| SHA-1 | 482 |
-| SHA-256 | 677 |
-| SHA-512 | 906 |
+| Algorithm    | Time Taken Windows (ms) | Time Taken OSX (ms) |
+| :----------- | ----------------------: | ------------------: |
+| MD5          | 369                     | 338                 |
+| SHA-1        | 482                     | 415                 |
+| SHA-256      | 677                     | 642                 |
+| SHA-512      | 906                     | 782                 |
+| Murmur-1     | 143                     | 101                 |
+| Murmur-2     | 135                     | 123                 |
+| Murmur-2-64  | 102                     |  92                 |
+| Murmur-3     | 168                     | 119                 |
+| Murmur-3-128 | 160                     | 261                 |
 
 Builds
 ------
