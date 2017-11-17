@@ -2,11 +2,20 @@ language: java
 
 sudo: false
 
-jdk:
-  - openjdk7
-  - oraclejdk7
-  - oraclejdk8
-  
-after_success:
-  - mvn clean test cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:cobertura
+matrix:
+  include:
+    - os: linux
+      dist: precise
+      jdk: oraclejdk7
+    - os: linux
+      dist: precise
+      jdk: openjdk7
+    - os: linux
+      dist: trusty
+      jdk: oraclejdk8
+    - os: linux
+      dist: trusty
+      jdk: oraclejdk9
 
+after_success:
+  - mvn clean cobertura:cobertura coveralls:report
