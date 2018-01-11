@@ -2,6 +2,10 @@ language: java
 
 sudo: false
 
+cache:
+  directories:
+    - $HOME/.m2
+
 addons:
   sonarcloud:
     organization: "sangupta-github" # the key of the org you chose at step #3
