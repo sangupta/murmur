@@ -2,6 +2,12 @@ language: java
 
 sudo: false
 
+addons:
+  sonarcloud:
+    organization: "sangupta-github" # the key of the org you chose at step #3
+    token:
+      secure: "EavjxKCEMJS5bjgk60juMS6bG8cF30niSHBavYEFqMzX1xraWMrIvNfdZrNafMFMoA7ltuL2Y3g5pTTEyw5m+nzwxscL2C3T6pQFnm9fWbObMl9YMVT9KrEar2PKY3bx5t7ITgU4Xsy1XA0H5jmMsRyu5BSSKXNcjgxjK3Bh+H4="
+
 matrix:
   include:
     - os: linux
@@ -16,3 +22,7 @@ matrix:
 
 after_success:
   - mvn clean test jacoco:report coveralls:report
+
+script:
+  # other script steps might be done before running the actual analysis
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
