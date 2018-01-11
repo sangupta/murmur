@@ -1,5 +1,10 @@
 # murmur
 
+[![Build Status](https://img.shields.io/travis/sangupta/murmur.svg)](https://travis-ci.org/sangupta/murmur)
+[![Coverage Status](https://img.shields.io/coveralls/sangupta/murmur.svg)](https://coveralls.io/github/sangupta/murmur?branch=master)
+[![license](https://img.shields.io/github/license/sangupta/murmur.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Maven Central](https://img.shields.io/maven-central/v/com.sangupta/murmur.svg)](https://maven-badges.herokuapp.com/maven-central/com.sangupta/murmur)
+
 `murmur` is a pure Java implementation of all Murmur hashes, namely, Murmur1, Murmur2 and Murmur3.
 The library is a direct Java implementation of the C++ source code. Hash generation has been 100%
 unit tested against the hashes generated using the C++ code. The library should help in building 
