@@ -2,31 +2,19 @@ language: java
 
 sudo: false
 
-cache:
-  directories:
-    - $HOME/.m2
+jdk:
+  - oraclejdk8
+  - oraclejdk11
+  - openjdk8
+  - openjdk9
+  - openjdk10
+  - openjdk11
 
-addons:
-  sonarcloud:
-    organization: "sangupta-github" # the key of the org you chose at step #3
-    token:
-      secure: "EavjxKCEMJS5bjgk60juMS6bG8cF30niSHBavYEFqMzX1xraWMrIvNfdZrNafMFMoA7ltuL2Y3g5pTTEyw5m+nzwxscL2C3T6pQFnm9fWbObMl9YMVT9KrEar2PKY3bx5t7ITgU4Xsy1XA0H5jmMsRyu5BSSKXNcjgxjK3Bh+H4="
-
-matrix:
-  include:
-    - os: linux
-      dist: precise
-      jdk: oraclejdk7
-    - os: linux
-      dist: trusty
-      jdk: oraclejdk8
-    - os: linux
-      dist: trusty
-      jdk: oraclejdk9
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "gczBzJkIgn21D7vsF/h7MtuzSoOP6tJhM9siAoFheygG8ZSRc7GQUlwuI3f24ym5K1P6hz2IS8hDbuwVVZpSQKUN1B+rcXlkFeAOljK6ZBxVh6UdvwQnBRIZXyJQomBIWjidnxGj+dOpjX3RgaSL/Q2okHAE3h5G3vEqRzayplw="
 
 after_success:
-  - mvn clean test jacoco:report coveralls:report
-
-# script:
-#  # other script steps might be done before running the actual analysis
-#  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
+  - mvn clean cobertura:cobertura coveralls:report
