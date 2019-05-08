@@ -13,9 +13,12 @@ than **MD5** and **SHA** computations.
 
 The library is tested on the following JDK versions:
 
-* Oracle JDK 9
+* Oracle JDK 11
 * Oracle JDK 8
-* Oracle JDK 7
+* Open JDK 11
+* Open JDK 10
+* Open JDK 9
+* Open JDK 8
 
 ## Why `murmur`?
 
