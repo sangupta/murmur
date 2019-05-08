@@ -1,38 +1,41 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	
-	<modelVersion>4.0.0</modelVersion>
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-	<groupId>com.sangupta</groupId>
-	<artifactId>murmur</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+    <modelVersion>4.0.0</modelVersion>
 
-	<name>murmur</name>
-	<description>Pure Java implementation of the Murmur Hash algorithms.</description>
-	<url>http://sangupta.com/projects/murmur</url>
-	<inceptionYear>2014</inceptionYear>
+    <groupId>com.sangupta</groupId>
+    <artifactId>murmur</artifactId>
+    <version>1.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
-	<licenses>
-		<license>
-			<name>The Apache Software License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-		</license>
-	</licenses>
-	
-	<scm>
-		<connection>scm:git:git://github.com/sangupta/murmur.git</connection>
-		<developerConnection>scm:git:http://git@github.com/sangupta/murmur.git</developerConnection>
-		<url>https://github.com/sangupta/murmur</url>
-	</scm>
-	
-	<developers>
-		<developer>
-			<id>sangupta</id>
-			<name>Sandeep Gupta</name>
-			<email>sandy.pec@gmail.com</email>
-			<url>https://sangupta.com</url>
-		</developer>
-	</developers>
+    <name>murmur</name>
+    <description>Pure Java implementation of the Murmur Hash algorithms.</description>
+    <url>http://sangupta.com/projects/murmur</url>
+    <inceptionYear>2014</inceptionYear>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:git://github.com/sangupta/murmur.git</connection>
+        <developerConnection>scm:git:http://git@github.com/sangupta/murmur.git</developerConnection>
+        <url>https://github.com/sangupta/murmur</url>
+    </scm>
+
+    <developers>
+        <developer>
+            <id>sangupta</id>
+            <name>Sandeep Gupta</name>
+            <email>sandy.pec@gmail.com</email>
+            <url>https://sangupta.com</url>
+        </developer>
+    </developers>
 
     <distributionManagement>
         <snapshotRepository>
@@ -45,46 +48,61 @@
         </repository>
     </distributionManagement>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		
-		<maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
         <build.timestamp>${maven.build.timestamp}</build.timestamp>
         <build.number />
-	</properties>
-	
-	<dependencies>
-		<!-- For unit testing -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-			<scope>test</scope>
-		</dependency>
+    </properties>
 
-		<!-- To read pre-computed files from disk -->
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>2.6</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+    <dependencies>
+        <!-- For unit testing -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
 
-	<build>
-		<finalName>murmur</finalName>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
-				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
-				</configuration>
-			</plugin>
-            
+        <!-- To read pre-computed files from disk -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- for comparing hashes against Guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>27.1-jre</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.sangupta</groupId>
+            <artifactId>jerry-core</artifactId>
+            <version>3.0.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>murmur</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+
             <!-- for code coverage -->
             <plugin>
                 <groupId>org.jacoco</groupId>
@@ -105,15 +123,15 @@
                 <groupId>org.eluder.coveralls</groupId>
                 <artifactId>coveralls-maven-plugin</artifactId>
                 <version>4.3.0</version>
-                    <configuration>
-                        <format>xml</format>
-                        <aggregate>true</aggregate>
-                    </configuration>
+                <configuration>
+                    <format>xml</format>
+                    <aggregate>true</aggregate>
+                </configuration>
             </plugin>
-		</plugins>
-	</build>
+        </plugins>
+    </build>
 
-	<profiles>
+    <profiles>
         <profile>
             <id>release</id>
             <build>
@@ -201,5 +219,5 @@
         </profile>
 
     </profiles>
-	
+
 </project>
