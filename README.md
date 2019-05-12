@@ -26,6 +26,48 @@ The library is tested on the following JDK versions:
 Implementations were available for `Murmur3` but for some of the legacy code that I maintain, I needed
 the `Murmur1` and `Murmur2` hashes. Thus, I ported the original implementations.
 
+You may find the hash inconsistent with [Google Guava]() library. The hash value is the same, it is
+the endian-ness of the hash that makes it look different. Refer to [Issue #3](https://github.com/sangupta/murmur/issues/3)
+for more details.
+
+To convert the hash into `byte[]` or a `hex-string` you may use the following code:
+
+```java
+/**
+ * Convert a given long value to byte-array.
+ * 
+ * @param x the long value
+ * 
+ * @return the byte[] array representation of it
+ */
+public static byte[] longToBytes(long x) {
+	ByteBuffer buffer = ByteBuffer.allocate(Long.BYTES);
+
+	// The ByteOrder.LITTLE_ENDIAN format matches the Google Guava toString() format
+	buffer.order(ByteOrder.LITTLE_ENDIAN);
+
+	buffer.putLong(x);
+	return buffer.array();
+}
+
+/**
+ * Convert a byte-array to hex string.
+ * 
+ * @param bytes the byte-array
+ * 
+ * @return the hex string
+ */
+public static String bytesToHex(byte[] bytes) {
+	char[] hexChars = new char[bytes.length * 2];
+	for (int j = 0; j < bytes.length; j++) {
+		int v = bytes[j] & 0xFF;
+		hexChars[j * 2] = hexArray[v >>> 4];
+		hexChars[j * 2 + 1] = hexArray[v & 0x0F];
+	}
+	return new String(hexChars);
+}
+```
+
 ## Features
 
 * Pure Java implementations of various Murmur hashes
