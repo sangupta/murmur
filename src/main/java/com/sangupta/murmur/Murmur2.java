@@ -2,21 +2,21 @@
  *
  * murmurhash - Pure Java implementation of the Murmur Hash algorithms.
  * Copyright (c) 2014, Sandeep Gupta
- * 
+ *
  * http://sangupta.com/projects/murmur
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * 		http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  */
 
 package com.sangupta.murmur;
@@ -24,15 +24,15 @@ package com.sangupta.murmur;
 /**
  * A pure Java implementation of the Murmur 2 hashing algorithm as presented
  * at <a href="https://sites.google.com/site/murmurhash/">Murmur Project</a>
- * 
+ *
  * Code is ported from original C++ source at 
  * <a href="https://sites.google.com/site/murmurhash/MurmurHash2.cpp?attredirects=0">
  * MurmurHash2.cpp</a>
- * 
+ *
  * and the 64-bit version at
  * <a href="https://sites.google.com/site/murmurhash/MurmurHash2_64.cpp?attredirects=0">
  * MurmurHash2_64.cpp</a>
- * 
+ *
  * @author sangupta
  * @since 1.0
  */
@@ -40,16 +40,16 @@ public class Murmur2 implements MurmurConstants {
 
 	/**
 	 * Compute the Murmur2 hash as described in the original source code.
-	 * 
+	 *
 	 * @param data
 	 *            the data that needs to be hashed
-	 * 
+	 *
 	 * @param length
 	 *            the length of the data that needs to be hashed
-	 * 
+	 *
 	 * @param seed
 	 *            the seed to use to compute the hash
-	 * 
+	 *
 	 * @return the computed hash value
 	 */
 	public static long hash(final byte[] data, int length, long seed) {
@@ -64,16 +64,16 @@ public class Murmur2 implements MurmurConstants {
 
 		for (int i = 0; i < length4; i++) {
 			final int i4 = i << 2;
-			
+
 			long k = (data[i4] & UNSIGNED_MASK);
 			k |= (data[i4 + 1] & UNSIGNED_MASK) << 8;
 			k |= (data[i4 + 2] & UNSIGNED_MASK) << 16;
 			k |= (data[i4 + 3] & UNSIGNED_MASK) << 24;
-			
+
 			k = ((k * m) & UINT_MASK);
 			k ^= ((k >>> r) & UINT_MASK);
 			k = ((k * m) & UINT_MASK);
-			
+
 			hash = ((hash * m) & UINT_MASK);
 			hash = ((hash ^ k) & UINT_MASK);
 		}
@@ -82,13 +82,11 @@ public class Murmur2 implements MurmurConstants {
 		int offset = length4 << 2;
 		switch (length & 3) {
 			case 3:
-				hash ^= ((data[offset + 2] << 16) & UINT_MASK);
-				
+				hash ^= ((data[offset + 2] & UNSIGNED_MASK) << 16);
 			case 2:
-				hash ^= ((data[offset + 1] << 8) & UINT_MASK);
-				
+				hash ^= ((data[offset + 1] & UNSIGNED_MASK) << 8);
 			case 1:
-				hash ^= (data[offset] & UINT_MASK);
+				hash ^= (data[offset] & UNSIGNED_MASK);
 				hash = ((hash * m) & UINT_MASK);
 		}
 
@@ -101,16 +99,16 @@ public class Murmur2 implements MurmurConstants {
 
 	/**
 	 * Compute the Murmur2 hash (64-bit version) as described in the original source code.
-	 * 
+	 *
 	 * @param data
 	 *            the data that needs to be hashed
-	 * 
+	 *
 	 * @param length
 	 *            the length of the data that needs to be hashed
-	 * 
+	 *
 	 * @param seed
 	 *            the seed to use to compute the hash
-	 * 
+	 *
 	 * @return the computed hash value
 	 */
 	public static long hash64(final byte[] data, int length, long seed) {
@@ -123,44 +121,44 @@ public class Murmur2 implements MurmurConstants {
 
         for (int i = 0; i < length8; i++) {
             final int i8 = i << 3;
-            
+
             long k =  ((long)data[i8]&0xff) +(((long)data[i8+1]&0xff)<<8)
                     +(((long)data[i8+2]&0xff)<<16) +(((long)data[i8+3]&0xff)<<24)
                     +(((long)data[i8+4]&0xff)<<32) +(((long)data[i8+5]&0xff)<<40)
                     +(((long)data[i8+6]&0xff)<<48) +(((long)data[i8+7]&0xff)<<56);
-            
+
             k *= m;
             k ^= k >>> r;
             k *= m;
-            
+
             h ^= k;
-            h *= m; 
+            h *= m;
         }
-        
+
         switch (length & 7) {
 			case 7:
 				h ^= (long) (data[(length & ~7) + 6] & 0xff) << 48;
 
 			case 6:
 				h ^= (long) (data[(length & ~7) + 5] & 0xff) << 40;
-			
+
 			case 5:
 				h ^= (long) (data[(length & ~7) + 4] & 0xff) << 32;
-			
+
 			case 4:
 				h ^= (long) (data[(length & ~7) + 3] & 0xff) << 24;
-			
+
 			case 3:
 				h ^= (long) (data[(length & ~7) + 2] & 0xff) << 16;
-			
+
 			case 2:
 				h ^= (long) (data[(length & ~7) + 1] & 0xff) << 8;
-			
+
 			case 1:
 				h ^= (long) (data[length & ~7] & 0xff);
 				h *= m;
         }
-     
+
         h ^= h >>> r;
         h *= m;
         h ^= h >>> r;
